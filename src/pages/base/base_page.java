@@ -57,46 +57,46 @@ public class base_page extends automateDriver {
 		System.out.println("last_page_listNum:"+i);
 		return i;
 	}
-	public int page_number() throws InterruptedException{
+	public int page_number(String selector_ul,String selector_tr) throws InterruptedException{
 		if(super.is_element_exist("msg_nodata")){
 			return 0;
 		}else{
-			if(this.third_last_pageNum1()<10){
-				this.click_last_page1();
-				super.explicit_wait(".//*[@id='msg_paging']/ul");
-				int page_number=(this.third_last_pageNum1()-1)*10+this.last_page_listNum1();
+			if(this.third_last_pageNum1(selector_ul)<10){
+				this.click_last_page1(selector_ul);
+				super.explicit_wait(".//*[@id='"+selector_ul+"']/ul");
+				int page_number=(this.third_last_pageNum1(selector_ul)-1)*10+this.last_page_listNum1(selector_tr);
 				return page_number;
 			}else{
 				for(int j=0;j<10000;j++){
 					if(!this.five_last_page_status().equals("disabled")){
 						break;
 						}else{
-							this.click_last_page1();
+							this.click_last_page1(selector_ul);
 							}
 					
-					super.explicit_wait(".//*[@id='msg_paging']/ul");
+					super.explicit_wait(".//*[@id='"+selector_ul+"']/ul");
 		}
-				int page_number=(this.third_last_pageNum1()-1)*10+this.last_page_listNum1();
+				int page_number=(this.third_last_pageNum1(selector_ul)-1)*10+this.last_page_listNum1(selector_tr);
 				return page_number;
 			}
 		}
 
 	}
-	public int third_last_pageNum1(){
+	public int third_last_pageNum1(String selector_ul){
 		List<WebElement> third_last_page_li=new ArrayList<WebElement>();
-		third_last_page_li=super.get_elements("x,.//*[@id='msg_paging']/ul/li");
+		third_last_page_li=super.get_elements("x,.//*[@id='"+selector_ul+"']/ul/li");
 		String third_last_page_text=third_last_page_li.get(third_last_page_li.size()-3).getText();
 		int i=Integer.parseInt(third_last_page_text);
 		return i;
 	}
-	public void click_last_page1(){
+	public void click_last_page1(String selector_ul){
 		List<WebElement> third_last_page_li=new ArrayList<WebElement>();
-		third_last_page_li=super.get_elements("x,.//*[@id='msg_paging']/ul/li");
+		third_last_page_li=super.get_elements("x,.//*[@id='"+selector_ul+"']/ul/li");
 		third_last_page_li.get(third_last_page_li.size()-3).click();
 	}
-	public int last_page_listNum1(){
+	public int last_page_listNum1(String selector_tr){
 		List<WebElement> last_page_list_tr=new ArrayList<WebElement>();
-		last_page_list_tr=super.get_elements("x,.//*[@id='msg_tbody']/tr");
+		last_page_list_tr=super.get_elements("x,.//*[@id='"+selector_tr+"']/tr");
 		int last_page_listNum=last_page_list_tr.size();
 		return last_page_listNum;
 		

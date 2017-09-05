@@ -57,9 +57,13 @@ public class connect_mysql {
 	  }
 	  public static void main(String[] args) throws SQLException{
 	  	connect_mysql conn=new connect_mysql();
-	  	String listValue="u.type,u.phone,u.parentId,u.nickName"; 
-		String sql="FROM `user_info` AS u where account='jimitest'";
+	  	String listValue="userId,fullParentId"; 
+		String sql="from user_info WHERE account='jimitest'";
 	  	conn.connectMySqlM(sql, listValue);
+	  	String a=conn.connectMySqlM(sql, listValue).get(0);
+	  	String b=conn.connectMySqlM(sql, listValue).get(1);
+	  	String s=b+a;
+	  	System.out.println(s);
 	  	}
 	   }
 
