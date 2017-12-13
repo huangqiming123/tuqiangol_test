@@ -249,6 +249,23 @@ public class AccountCenterFictitiousAccountManagerPage extends AutomateDriver {
 	public void switchToFicAccountPage(){
 		super.switchToFrame("fictitiousaccountFrame");
 	}
+	public void clickFicAccountDelBtn(){
+		super.clickElement("x,.//*[@id='fictitiousAccount_tbody']/tr[1]/td[2]");
+		super.explicitWait(".//*[@id='layui-layer1']");
+	}
+	
+	public void canlceDelFicAccount(){
+		super.clickElement("x,.//*[@id='layui-layer1']/span[1]/a");
+		super.explicitWait("html/body/div[1]/div[1]/div/b");
+	}
+	public void canlceDelFicAccountBtn(){
+		super.clickElement("x,.//*[@id='layui-layer2']/div[3]/a[2]");
+		super.explicitWait("html/body/div[1]/div[1]/div/b");
+	}
+	public void clickDelFicAccountBtn(){
+		super.clickElement("x,.//*[@id='layui-layer3']/div[3]/a[1]");
+		super.explicitWait("html/body/div[1]/div[1]/div/b");
+	}
 	
 }
 

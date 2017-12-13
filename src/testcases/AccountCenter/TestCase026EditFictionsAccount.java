@@ -15,7 +15,7 @@ import pages.base.BasePage;
 import data.comdata.AssertData;
 
 public class TestCase026EditFictionsAccount {
-WebDriver dr;
+	WebDriver dr;
 	
 	@BeforeMethod
 	public void setUp() throws Exception{
