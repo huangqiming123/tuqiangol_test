@@ -10,8 +10,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import data.comdata.SqlData;
-import pages.accountcenter.AccountCenterMsgCenterPage;
+import data.comdata.sqlDate.SqlData;
+import pages.accountcenterPage.AccountCenterMsgCenterPage;
 import pages.base.BasePage;
 import model.ConnectMysql;
 import model.CsvReader;
@@ -37,10 +37,10 @@ public class TestCase022AccountCenterMsgSearch  {
 		List<List<String>> csv_data=csvr.readCSVFile();
 		AccountCenterMsgCenterPage acmcp=new AccountCenterMsgCenterPage(dr);
 		basep.login();
-		acmcp.enter_msg_center();
+		acmcp.enterMsgCenter();
 		for(int i=0;i<csv_data.size();i++){
-			acmcp.msg_center_param_input(csv_data.get(i).get(0), csv_data.get(i).get(1), csv_data.get(i).get(2));
-			int actual_message_num=acmcp.message_number();
+			acmcp.msgCenterParamInput(csv_data.get(i).get(0), csv_data.get(i).get(1), csv_data.get(i).get(2));
+			int actual_message_num=acmcp.messageNumber();
 			List<String> fullParentIdAnduserId=new ArrayList<String>();
 			List<String> account_center_mess_number=new ArrayList<String>();
 			fullParentIdAnduserId=conn.connectMySqlM(sqld.fullParentIdAnduserId()[0], sqld.fullParentIdAnduserId()[1]);

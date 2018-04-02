@@ -17,88 +17,120 @@ public class BasePage extends AutomateDriver {
 		super(dr);
 		// TODO Auto-generated constructor stub
 	}
+	//登录
 	public void login(){
-		super.navigateToPage(comd.base_url());
+		super.navigateToPage(comd.baseUrl());
 		super.explicitWait(".//*[@id='logins']");
-		super.operateInputElement("account", comd.base_user()[2]);
-		super.operateInputElement("password", comd.base_user()[3]);
+		super.operateInputElement("account", comd.baseUser()[2]);
+		super.operateInputElement("password", comd.baseUser()[3]);
 		super.clickElement("x,//*[@id='checkbox']");
 		super.clickElement("logins");
 		super.explicitWait(".//*[@id='navMenu']");
 	}
-	public int third_last_pageNum(){
-		String third_last_pageNum="return $('#msg_paging ul').find('li').eq(-3).find('span').text()";
+	
+	/*
+	 得到倒数第三个li标签的页码数 
+	 */
+	public int thirdLastPageNum(){
+		String ThirdLastPageNum="return $('#msg_paging ul').find('li').eq(-3).find('span').text()";
 		JavascriptExecutor js=(JavascriptExecutor)dr;
-		Object rs=js.executeScript(third_last_pageNum);
+		Object rs=js.executeScript(ThirdLastPageNum);
 		int i=Integer.parseInt(String.valueOf(rs));
-		System.out.println("third_last_pageNum :"+i);
+		System.out.println("ThirdLastPageNum :"+i);
 		return i;
 	}
-	public void click_last_page() throws InterruptedException{
-		String third_last_page_click="return $('#msg_paging ul').find('li').eq(-3).find('a').click()";
+	/**
+	 * 点击现有的最后一页
+	 * @throws InterruptedException
+	 */
+	public void clickLastPage() throws InterruptedException{
+		String ThirdLastPageClick="return $('#msg_paging ul').find('li').eq(-3).find('a').click()";
 		JavascriptExecutor js=(JavascriptExecutor)dr;
-		js.executeScript(third_last_page_click);
+		js.executeScript(ThirdLastPageClick);
 	
 	}
-	public String five_last_page_status(){
-		String five_last_page_status="return $('#msg_paging ul').find('li').eq(-5).attr('class)";
+	/**
+	 * 获取倒数第五个li标签的class属性
+	 * @return
+	 */
+	public String fiveLastPageStatus(){
+		String FiveLastPageStatus="return $('#msg_paging ul').find('li').eq(-5).attr('class)";
 		JavascriptExecutor js=(JavascriptExecutor)dr;
-		String rs=(String)js.executeScript(five_last_page_status);
+		String rs=(String)js.executeScript(FiveLastPageStatus);
 		//String i=String.valueOf(rs);
-		System.out.println("five_last_page_status :"+rs);
+		System.out.println("FiveLastPageStatus :"+rs);
 		return rs;
 		
 	}
-	public int last_page_listNum(){
-		String last_page_listNum="return $('#msg_tbody tr').length";
+	/**
+	 * 获取最后一页tr数量
+	 * @return
+	 */
+	public int lastPageListNum(){
+		String LastPageListNum="return $('#msg_tbody tr').length";
 		JavascriptExecutor js=(JavascriptExecutor)dr;
-		Long rs=(Long)js.executeScript(last_page_listNum);
+		Long rs=(Long)js.executeScript(LastPageListNum);
 		int i=Integer.parseInt(String.valueOf(rs));
-		System.out.println("last_page_listNum:"+i);
+		System.out.println("LastPageListNum:"+i);
 		return i;
 	}
-	public int page_number(String selector_ul,String selector_tr) throws InterruptedException{
+	//计算总条数
+	public int pageNumber(String selector_ul,String selector_tr) throws InterruptedException{
 		if(super.isElementExist("msg_nodata")){
 			return 0;
 		}else{
-			if(this.third_last_pageNum1(selector_ul)<10){
-				this.click_last_page1(selector_ul);
+			if(this.thirdLastPageNum1(selector_ul)<10){
+				this.clickLastPage1(selector_ul);
 				super.explicitWait(".//*[@id='"+selector_ul+"']/ul");
-				int page_number=(this.third_last_pageNum1(selector_ul)-1)*10+this.last_page_listNum1(selector_tr);
-				return page_number;
+				int pageNumber=(this.thirdLastPageNum1(selector_ul)-1)*10+this.lastPageListNum1(selector_tr);
+				return pageNumber;
 			}else{
 				for(int j=0;j<10000;j++){
-					if(!this.five_last_page_status().equals("disabled")){
+					if(!this.fiveLastPageStatus().equals("disabled")){
 						break;
 						}else{
-							this.click_last_page1(selector_ul);
+							this.clickLastPage1(selector_ul);
 							}
 					
 					super.explicitWait(".//*[@id='"+selector_ul+"']/ul");
 		}
-				int page_number=(this.third_last_pageNum1(selector_ul)-1)*10+this.last_page_listNum1(selector_tr);
-				return page_number;
+				int pageNumber=(this.thirdLastPageNum1(selector_ul)-1)*10+this.lastPageListNum1(selector_tr);
+				return pageNumber;
 			}
 		}
 
 	}
-	public int third_last_pageNum1(String selector_ul){
-		List<WebElement> third_last_page_li=new ArrayList<WebElement>();
-		third_last_page_li=super.getElements("x,.//*[@id='"+selector_ul+"']/ul/li");
-		String third_last_page_text=third_last_page_li.get(third_last_page_li.size()-3).getText();
-		int i=Integer.parseInt(third_last_page_text);
+	/**
+	 * 获取倒数第三个li数据（页面数量）
+	 * @param selector_ul
+	 * @return
+	 */
+	public int thirdLastPageNum1(String selector_ul){
+		List<WebElement> ThirdLastPageLi=new ArrayList<WebElement>();
+		ThirdLastPageLi=super.getElements("x,.//*[@id='"+selector_ul+"']/ul/li");
+		String ThirdLastPageText=ThirdLastPageLi.get(ThirdLastPageLi.size()-3).getText();
+		int i=Integer.parseInt(ThirdLastPageText);
 		return i;
 	}
-	public void click_last_page1(String selector_ul){
-		List<WebElement> third_last_page_li=new ArrayList<WebElement>();
-		third_last_page_li=super.getElements("x,.//*[@id='"+selector_ul+"']/ul/li");
-		third_last_page_li.get(third_last_page_li.size()-3).click();
+	/**
+	 * 点击最后一页
+	 * @param selector_ul
+	 */
+	public void clickLastPage1(String selector_ul){
+		List<WebElement> ThirdLastPageLi=new ArrayList<WebElement>();
+		ThirdLastPageLi=super.getElements("x,.//*[@id='"+selector_ul+"']/ul/li");
+		ThirdLastPageLi.get(ThirdLastPageLi.size()-3).click();
 	}
-	public int last_page_listNum1(String selector_tr){
-		List<WebElement> last_page_list_tr=new ArrayList<WebElement>();
-		last_page_list_tr=super.getElements("x,.//*[@id='"+selector_tr+"']/tr");
-		int last_page_listNum=last_page_list_tr.size();
-		return last_page_listNum;
+	/**
+	 * 获取最后一页列表的数量
+	 * @param selector_tr
+	 * @return
+	 */
+	public int lastPageListNum1(String selector_tr){
+		List<WebElement> LastPageListTr=new ArrayList<WebElement>();
+		LastPageListTr=super.getElements("x,.//*[@id='"+selector_tr+"']/tr");
+		int LastPageListNum=LastPageListTr.size();
+		return LastPageListNum;
 		
 	}
 

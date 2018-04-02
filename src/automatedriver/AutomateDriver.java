@@ -21,7 +21,7 @@ public class AutomateDriver {
 	public AutomateDriver(WebDriver dr) {
 		this.dr = dr;
 	}
-
+	
 	public String getCurrentUrl() {
 		return dr.getCurrentUrl();
 	}
@@ -33,14 +33,15 @@ public class AutomateDriver {
 	public void navigateToPage(String url) {
 		dr.get(url);
 	}
-
+	//clear cookie
 	public void clearCookies() {
 		dr.manage().deleteAllCookies();
 	}
+	//clear inputBox
 	public void clearElementInfo(String selector){
 		this.getElement(selector).clear();
 	}
-
+	
 	public void operateInputElement(String selector, String value) {
 		this.getElement(selector).clear();
 		this.getElement(selector).sendKeys(value);
@@ -128,7 +129,7 @@ public class AutomateDriver {
 		return text;
 	}
 
-	// ��긡��
+	// 浮动元素方法
 	public void floatElement(String selector) {
 		Actions ac = new Actions(dr);
 		ac.moveToElement(this.getElement(selector)).perform();

@@ -10,14 +10,12 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-
-
-import data.comdata.AssertData;
 import model.CsvReader;
-import pages.accountcenter.AccountCenterFictitiousAccountManagerPage;
+import pages.accountcenterPage.AccountCenterFictitiousAccountManagerPage;
 import pages.base.BasePage;
 import model.ConnectMysql;
-import data.comdata.SqlData;
+import data.comdata.assertDate.ComAssertData;
+import data.comdata.sqlDate.SqlData;
 
 public class TestCase025AddFictiousAccount {
 	 WebDriver dr;
@@ -38,7 +36,7 @@ public class TestCase025AddFictiousAccount {
     	 BasePage basep=new BasePage(dr);
     		
     	 AccountCenterFictitiousAccountManagerPage acfam=new AccountCenterFictitiousAccountManagerPage(dr);
-    	 AssertData assertd=new AssertData();
+    	 ComAssertData assertd=new ComAssertData();
     	 SqlData sqld=new SqlData();
     	 CsvReader csvr=new CsvReader("D:\\workplace\\tuqiangol_test\\src\\data\\accountcenter\\addFicAccountData.csv");
     	 List<List<String>> CsvData=csvr.readCSVFile();

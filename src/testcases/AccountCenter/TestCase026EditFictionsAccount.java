@@ -9,10 +9,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import data.comdata.assertDate.ComAssertData;
 import model.CsvReader;
-import pages.accountcenter.AccountCenterFictitiousAccountManagerPage;
+import pages.accountcenterPage.AccountCenterFictitiousAccountManagerPage;
 import pages.base.BasePage;
-import data.comdata.AssertData;
 
 public class TestCase026EditFictionsAccount {
 	WebDriver dr;
@@ -33,7 +33,7 @@ public class TestCase026EditFictionsAccount {
     	 BasePage basep=new BasePage(dr);
     	 AccountCenterFictitiousAccountManagerPage acfam=new AccountCenterFictitiousAccountManagerPage(dr);
  		 CsvReader csvr=new CsvReader("D:\\workplace\\tuqiangol_test\\src\\data\\accountcenter\\editFicAccountData.csv");
- 		 AssertData assertd = new AssertData();
+ 		 ComAssertData assertd = new ComAssertData();
  		 List<List<String>> CsvData=csvr.readCSVFile();
  		 basep.login();
  		 acfam.enterFictitiousAccountPage();

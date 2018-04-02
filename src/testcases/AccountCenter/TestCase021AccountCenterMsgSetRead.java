@@ -10,11 +10,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import data.comdata.AssertData;
-import data.comdata.SqlData;
+import data.comdata.assertDate.ComAssertData;
+import data.comdata.sqlDate.SqlData;
 import model.ConnectMysql;
 import model.CsvReader;
-import pages.accountcenter.AccountCenterMsgCenterPage;
+import pages.accountcenterPage.AccountCenterMsgCenterPage;
 import pages.base.BasePage;
 
 
@@ -33,17 +33,17 @@ public class TestCase021AccountCenterMsgSetRead {
      @Test
      public void test_account_center_msg_set_read() throws Exception{
     	BasePage basep=new BasePage(dr);
- 		AssertData assertd=new AssertData();
+ 		ComAssertData assertd=new ComAssertData();
  		ConnectMysql conn=new ConnectMysql();
  		SqlData sqld=new SqlData();
  		CsvReader csvr=new CsvReader("D:\\workplace\\tuqiangol_test\\src\\data\\account_center\\message_search_unread.csv");
  		List<List<String>> csv_data=csvr.readCSVFile();
  		AccountCenterMsgCenterPage acmcp=new AccountCenterMsgCenterPage(dr);
  		basep.login();
- 		acmcp.enter_msg_center();
+ 		acmcp.enterMsgCenter();
  		Assert.assertEquals(acmcp.mess_center_title(), assertd.account_center_msg_center_title()[0], "消息中心title错误");
- 		acmcp.msg_center_param_input(csv_data.get(0).get(0), csv_data.get(0).get(1), csv_data.get(0).get(2));
- 		int actual_message_unread_num=acmcp.message_number();
+ 		acmcp.msgCenterParamInput(csv_data.get(0).get(0), csv_data.get(0).get(1), csv_data.get(0).get(2));
+ 		int actual_message_unread_num=acmcp.messageNumber();
  		if(actual_message_unread_num>0){
  			acmcp.clickFirstCheckboxUnreadAndSetRead();
  			Assert.assertEquals(acmcp.getSetReadStatusText(),assertd.accountCenterMsgCenterGetSetReadStatusText()[0],"设置已读操作失败");

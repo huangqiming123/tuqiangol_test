@@ -6,8 +6,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import data.comdata.AssertData;
-import pages.accountcenter.AccountCenterFictitiousAccountManagerPage;
+import data.comdata.assertDate.ComAssertData;
+import pages.accountcenterPage.AccountCenterFictitiousAccountManagerPage;
 import pages.base.BasePage;
 
 public class TestCase027DeleteFictionsAccount {
@@ -28,7 +28,7 @@ WebDriver dr;
      public void testDeleteFictionsAccount() throws Exception{
     	 BasePage basep=new BasePage(dr);
     	 AccountCenterFictitiousAccountManagerPage acfam=new AccountCenterFictitiousAccountManagerPage(dr);
-    	 AssertData assertd = new AssertData();
+    	 ComAssertData assertd = new ComAssertData();
     	 basep.login();
  		 acfam.enterFictitiousAccountPage();
  		 String ficAccount=acfam.getFicAccountAccount();
